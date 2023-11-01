@@ -1,6 +1,9 @@
 function findShortestStringRecursive(arr) {
   // type your code here
-  if (arr.length < 3) {
+  if (arr.length === 1) {
+    return arr[0];
+  }
+  if (arr.length === 2) {
     const shortest = arr[0].length < arr[1].length ? arr[0] : arr[1];
     console.log("index 0: " + arr[0] + " index 1: " + arr[1] + " shorter: " + shortest);
     return shortest
@@ -33,6 +36,25 @@ if (require.main === module) {
 
   console.log("Expecting: 'lily'");
   console.log("=>", findShortestStringRecursive(['flower', 'juniper', 'lily', 'dandelion']));
+
+  //benchmark
+  let longInput = [];
+  for (let index = 0; index < 10; index++) {
+    longInput.push("abde");
+    longInput.push("dds");
+    longInput.push("A");
+  }
+  const startTime = Date.now();
+  console.log("Expecting: recursion depth exceeding tbh: ");
+  console.log("=>", findShortestStringRecursive(longInput));
+  for (let index = 0; index < 100; index++) {
+    findShortestStringRecursive(longInput);
+  }
+  const endTime = Date.now();
+  const averageTime = (endTime - startTime)/101;
+  console.log("average runtime: ", averageTime);
+
+
 }
 
 module.exports = findShortestStringRecursive;
