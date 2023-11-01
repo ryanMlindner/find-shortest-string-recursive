@@ -1,5 +1,22 @@
 function findShortestStringRecursive(arr) {
   // type your code here
+  if (arr.length < 3) {
+    const shortest = arr[0].length < arr[1].length ? arr[0] : arr[1];
+    console.log("index 0: " + arr[0] + " index 1: " + arr[1] + " shorter: " + shortest);
+    return shortest
+  }
+  else {
+    const divisor = Math.floor(arr.length / 2)
+    const secondHalfShortest = findShortestStringRecursive(arr.slice(0, divisor));
+    console.log("second half shortest: " + secondHalfShortest);
+    const firstHalfShortest = findShortestStringRecursive(arr.slice(divisor));
+    console.log("first half shortest: " +firstHalfShortest);
+    const shortest = secondHalfShortest.length < firstHalfShortest.length 
+    ? secondHalfShortest 
+    : firstHalfShortest;
+    console.log("shortest: " + shortest);
+    return shortest;
+  }
 }
 
 if (require.main === module) {
